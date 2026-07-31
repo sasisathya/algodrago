@@ -1,124 +1,304 @@
-# Visualize DSA
+# AlgoDrago - DSA Visualizer
 
-An interactive, browser-based visualizer for classic sorting algorithms — watch Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, and Quick Sort run step-by-step with color-coded comparisons, swaps, and sorted state.
+A comprehensive, interactive algorithm visualizer for learning Data Structures and Algorithms. Watch 67+ algorithms across 8 categories execute step-by-step with real-time visualization, pseudocode highlighting, variable tracking, and educational explanations.
 
 ![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
 ![Vite](https://img.shields.io/badge/vite-8.x-646CFF)
 ![React](https://img.shields.io/badge/react-19.x-61DAFB)
-![TypeScript](https://img.shields.io/badge/typescript-6.x-3178C6)
+![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6)
 
-## Features
+## 🎯 Overview
 
-- 🎬 **Play / Pause / Step** — run the algorithm automatically or walk through it one step at a time, resuming from wherever you paused
-- 🎲 **Randomize** — generate a fresh random array without touching your other settings
-- 🔄 **Two-tier Reset** — a single click restores the initial array, a double click resets the array *and* all settings
-- ⚙️ **Settings panel** — customize array size (5–50 elements), playback speed, or type in your own comma-separated array
-- ⌨️ **Keyboard shortcuts** — `Space` to play/pause, `→` to step forward, `R` to reset
-- 🔍 **Search & filter** — find algorithms by name, category, difficulty, or visualization type
-- 🎨 **Color-coded visualization** — grey (unsorted), yellow (comparing), red (swapping), green (sorted)
+AlgoDrago is a modern, interactive platform for visualizing algorithms in real-time. It supports multiple data structure types with beautiful, responsive visualizations powered by Canvas API.
 
-## Tech Stack
+### Supported Algorithm Categories
 
-- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite 8](https://vitejs.dev/) for dev server & build tooling
-- Plain CSS (custom design system in `src/style.css`) — no CSS framework dependency at runtime
-- [Oxlint](https://oxc.rs/) for fast linting
+| Category | Count | Visualizer |
+|----------|-------|-----------|
+| **Sorting** | 8 | Array/Bar Chart |
+| **Searching** | 7 | Array/Bar Chart |
+| **Graph** | 2 | Graph (Circular Layout) |
+| **Tree** | 4 | Tree (Hierarchical Layout) |
+| **Divide & Conquer** | 3 | Recursion Tree |
+| **Other Categories** | 43+ | Various |
+| **Total** | 67+ | 4 Visualizer Types |
 
-## Getting Started
+## ✨ Key Features
+
+### Visualization & Animation
+- 🎬 **Play / Pause / Step** — Run algorithms automatically or manually step through them
+- ⏱️ **Speed Control** — Adjust animation speed (0.5x to 3x)
+- 🔄 **Reset** — Restore to initial state with one click
+- 🎲 **Randomize** — Generate fresh random arrays instantly
+
+### Algorithm Exploration
+- 🔍 **Search & Filter** — Find algorithms by name, category, difficulty, or tag
+- 📊 **Complexity Display** — Real-time Time & Space complexity info
+- 📖 **Algorithm Explanations** — "How It Works", "Step by Step", "When to Use", "Real-World Examples"
+- 💡 **Learning Tips** — Common mistakes and optimization insights
+
+### Data Structure Support
+- **Array-based** — Sorting, Searching (bar chart visualization)
+- **Graph-based** — BFS, DFS with circular node layout
+- **Tree-based** — Tree traversals with hierarchical layout
+- **Recursion Trees** — Divide & Conquer with call stack visualization
+
+### Code & Variables
+- ⌨️ **Pseudocode Highlighting** — Lines highlight as they execute
+- 📝 **Variable Tracking** — Watch variables change in real-time
+- 📊 **State Panel** — View algorithm state, comparisons, swaps, visited nodes
+- 🎨 **Color Coding** — Visual indicators (pending, comparing, swapping, completed, memoized)
+
+### Interactive Controls
+- ⚙️ **Settings Modal** — Customize array size, sort order, and input values
+- ✏️ **Custom Input** — Type comma-separated values or generate random arrays
+- 📋 **Copy/Paste** — Easily share array configurations
+
+## 🏗️ Architecture
+
+Built with **Design Patterns** for scalability and maintainability:
+
+### Core Patterns
+- **Factory Pattern** — `VisualizerFactory` creates visualizers dynamically
+- **Strategy Pattern** — Pluggable algorithm strategies in `AlgorithmStrategyRegistry`
+- **Builder Pattern** — `StepBuilder` for consistent step creation
+
+### Configuration-Driven
+- All algorithms defined in JSON-like TypeScript configs
+- Visualizer types are JSON-configurable
+- UI layout driven by configuration
+
+```
+src/
+├── config/                      # Design patterns & configurations
+│   ├── visualizerRegistry.ts    # Factory pattern for visualizers
+│   ├── algorithmStrategy.ts     # Strategy pattern for algorithms
+│   ├── stepBuilder.ts           # Builder pattern for steps
+│   └── uiConfig.ts              # UI configuration
+├── data/                        # Algorithm implementations
+│   ├── algorithms.ts            # Sorting & Searching
+│   ├── graphAlgorithms.ts       # BFS, DFS
+│   ├── treeAlgorithms.ts        # Tree traversals
+│   └── divideConquerAlgorithms.ts
+├── components/visualize/        # Visualizer components
+│   ├── BarChart.tsx             # Array visualizer
+│   ├── GraphVisualizer.tsx      # Graph visualizer
+│   ├── TreeVisualizer.tsx       # Tree visualizer
+│   └── RecursionTreeVisualizer.tsx
+├── pages/
+│   ├── Home.tsx                 # Algorithm browser
+│   └── Visualize.tsx            # Main visualizer page
+└── utils/                       # Helpers
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
-
-- [Node.js](https://nodejs.org/) v18 or later
-- npm (bundled with Node.js)
-
-Check your versions:
-
-```bash
-node -v
-npm -v
-```
+- Node.js v18+
+- npm or yarn
 
 ### Installation
 
-1. Clone or download this repository
-2. Install dependencies:
+```bash
+# Clone the repository
+git clone https://github.com/sasisathya/algodrago.git
+cd algodrago
 
-   ```bash
-   npm install
-   ```
+# Install dependencies
+npm install
+```
 
-### Run the app locally
+### Run Development Server
 
 ```bash
 npm run dev
 ```
 
-This starts the Vite dev server (default: [http://localhost:5173](http://localhost:5173)). If that port is busy, Vite will automatically pick the next available one — check the terminal output for the actual URL.
+Visit [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Build for production
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-Type-checks the project with `tsc` and outputs an optimized production build to the `dist/` folder.
+Outputs optimized production build to `dist/` folder.
 
-### Preview the production build
+### Preview Production Build
 
 ```bash
 npm run preview
 ```
 
-Serves the contents of `dist/` locally so you can sanity-check the production build before deploying.
+## 🎮 How to Use
 
-### Lint
+### 1. Browse Algorithms
+- Visit Home page to see all algorithms
+- Filter by category, difficulty, or search by name
+- Click any algorithm card to open visualizer
 
-```bash
-npm run lint
+### 2. Configure Algorithm
+- Adjust array size (5-50 elements)
+- Choose sort order (ascending/descending)
+- Enter custom array values
+- Set target value for searching algorithms
+
+### 3. Run Visualization
+- Click **Play** to run automatically
+- Click **Next Step** to manually step through
+- Click **Pause** to stop
+- Click **Reset** to restart
+- Use **Speed** slider to adjust animation speed
+
+### 4. Monitor Execution
+- Watch pseudocode lines highlight as they execute
+- Track variables in real-time
+- View complexity metrics
+- See state changes (visited nodes, call stack, etc.)
+
+### 5. Learn
+- Read algorithm explanation (How It Works)
+- Study Time & Space complexity
+- View real-world examples
+- Learn when to use each algorithm
+
+## 📚 Algorithm Categories
+
+### Sorting (8)
+Bubble, Selection, Insertion, Merge, Quick, Heap, Counting, Radix
+
+### Searching (7)
+Linear, Binary, Jump, Exponential, Interpolation, Fibonacci, Ternary
+
+### Graph (2)
+BFS (Breadth-First Search), DFS (Depth-First Search)
+
+### Tree (4)
+Inorder, Preorder, Postorder, Level Order Traversal
+
+### Divide & Conquer (3)
+Tower of Hanoi, Fibonacci (Memoization), Strassen's Matrix Multiplication
+
+### And More...
+Dynamic Programming, Greedy, Backtracking, Bit Manipulation, and more.
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 19 + TypeScript
+- **Build Tool**: Vite 8
+- **Styling**: Custom CSS with glassmorphism design
+- **Canvas**: Native Canvas API for graph/tree rendering
+- **State Management**: Zustand
+- **Linting**: Oxlint
+- **Package Manager**: npm
+
+## 🎨 Design System
+
+- **Theme**: Dark mode with glassmorphism UI
+- **Colors**: Custom CSS variables for consistent theming
+- **Animations**: Smooth transitions and step animations
+- **Responsive**: Works on desktop, tablet, mobile
+- **Accessibility**: Keyboard shortcuts for navigation
+
+### Keyboard Shortcuts
+- `Space` — Play/Pause
+- `→` — Next Step
+- `←` — Previous Step
+- `R` — Reset
+- `Ctrl+L` — Focus search
+
+## 📖 Adding New Algorithms
+
+The architecture makes adding new algorithms simple:
+
+### 1. Create Algorithm Function
+
+```typescript
+async function myAlgorithm(array: number[], target?: number): Promise<DivideConquerStep[]> {
+  const steps: DivideConquerStep[] = []
+  
+  // Generate steps using StepBuilder
+  steps.push(
+    createStep()
+      .setArray([...array])
+      .setComparingIndices([0, 1])
+      .setLine(1)
+      .build()
+  )
+  
+  return steps
+}
 ```
 
-Runs [Oxlint](https://oxc.rs/) against the codebase.
+### 2. Register Algorithm
 
-## Project Structure
+```typescript
+const algorithm: AlgorithmStrategy = {
+  id: 'my-algorithm',
+  name: 'My Algorithm',
+  category: 'Sorting',
+  difficulty: 'intermediate',
+  visualizerType: 'array',
+  timeComplexity: 'O(n log n)',
+  spaceComplexity: 'O(1)',
+  // ... other metadata ...
+  implement: myAlgorithm
+}
 
-```
-dsa-visualizer/
-├── src/
-│   ├── data/
-│   │   └── algorithms.ts      # Algorithm registry — metadata + step-generating implementations
-│   ├── pages/
-│   │   ├── Home.tsx            # Landing page: search, filters, algorithm cards
-│   │   └── Visualize.tsx       # Detail page: bar chart, controls, legend, settings modal
-│   ├── App.tsx                  # Lightweight client-side router (Home ↔ Visualize)
-│   ├── style.css                # Design system: CSS variables, glassmorphism, gradients, animations
-│   └── main.tsx                 # React entry point
-├── index.html
-├── package.json
-└── vite.config.ts
+algorithmRegistry.register(algorithm)
 ```
 
-## Adding a New Algorithm
+### 3. That's It!
+Algorithm automatically appears in the UI with full visualization support.
 
-The app is data-driven, so adding an algorithm doesn't require touching any page component:
+## 📊 Project Statistics
 
-1. Open `src/data/algorithms.ts`
-2. Write an `implement` function with the signature `(array: number[]) => Promise<AlgorithmStep[]>` that pushes a step for every comparison/swap:
+- **Total Lines of Code**: 13,000+
+- **Components**: 15+
+- **Visualizers**: 4 types
+- **Algorithms**: 67+
+- **Configuration Files**: 5
+- **Design Patterns**: 3 (Factory, Strategy, Builder)
 
-   ```ts
-   async function mySort(array: number[]): Promise<AlgorithmStep[]> {
-     const steps: AlgorithmStep[] = []
-     // ... push steps as you compare/swap/mark sorted ...
-     return steps
-   }
-   ```
+## 🐛 Known Issues & Future Enhancements
 
-3. Add an entry to the `algorithms` array with its metadata (name, difficulty, complexity, tags, etc.) and point `implement` at your function
-4. That's it — it will automatically appear on the Home page and be fully playable on the Visualize page
+### Planned Features
+- [ ] More sorting algorithms (Cocktail Sort, Comb Sort, etc.)
+- [ ] Advanced graph algorithms (Dijkstra, BFS shortest path)
+- [ ] Dynamic programming algorithms
+- [ ] Animation speed profiles
+- [ ] Theme customization
+- [ ] Mobile app version
+- [ ] Algorithm comparison tool
 
-## Browser Support
+### Known Limitations
+- Very large arrays (100+) may have performance issues
+- Some mobile devices may have rendering performance variations
 
-Latest versions of Chrome, Firefox, Safari, and Edge. The UI relies on modern CSS (`backdrop-filter`, CSS custom properties), so very old browsers are not supported.
-
-## License
+## 📄 License
 
 This project is provided as-is for educational purposes.
+
+## 👨‍💻 Author
+
+**sasisathya** — Created as a comprehensive learning tool for Data Structures and Algorithms
+
+## 🤝 Contributing
+
+Contributions are welcome! To add:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/add-algorithm`)
+3. Commit your changes
+4. Push to branch and open a Pull Request
+
+## 📞 Support
+
+For issues, questions, or suggestions:
+- Open an issue on GitHub
+- Check existing issues first to avoid duplicates
+
+---
+
+**Happy Learning! 🚀**
+
+Visit [AlgoDrago](https://github.com/sasisathya/algodrago) to get started.
