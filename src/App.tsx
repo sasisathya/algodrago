@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Home } from './pages/Home'
 import { Visualize } from './pages/Visualize'
+import { VisualizersDashboard } from './pages/VisualizersDashboard'
+import { Market } from './pages/Market'
 import './style.css'
 
 function App() {
@@ -11,7 +13,11 @@ function App() {
     // Handle URL changes
     const handlePopState = () => {
       const path = window.location.pathname
-      if (path.startsWith('/visualize/')) {
+      if (path === '/market') {
+        setCurrentPage('market')
+      } else if (path === '/visualizers') {
+        setCurrentPage('visualizers')
+      } else if (path.startsWith('/visualize/')) {
         const id = path.replace('/visualize/', '')
         setAlgorithmId(id)
         setCurrentPage('visualize')
@@ -32,7 +38,15 @@ function App() {
       if (target.tagName === 'A') {
         const href = target.getAttribute('href')
         if (href) {
-          if (href.startsWith('/visualize/')) {
+          if (href === '/market') {
+            e.preventDefault()
+            setCurrentPage('market')
+            window.history.pushState({}, '', href)
+          } else if (href === '/visualizers') {
+            e.preventDefault()
+            setCurrentPage('visualizers')
+            window.history.pushState({}, '', href)
+          } else if (href.startsWith('/visualize/')) {
             e.preventDefault()
             const id = href.replace('/visualize/', '')
             setAlgorithmId(id)
@@ -59,6 +73,10 @@ function App() {
     <div>
       {currentPage === 'home' ? (
         <Home />
+      ) : currentPage === 'market' ? (
+        <Market />
+      ) : currentPage === 'visualizers' ? (
+        <VisualizersDashboard />
       ) : (
         <Visualize algorithmId={algorithmId} />
       )}

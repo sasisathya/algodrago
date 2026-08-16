@@ -221,7 +221,8 @@ export function Home() {
             </div>
             <nav>
               <a href="/" className="active">Home</a>
-              <a href="#visualizers">Visualizers</a>
+              <a href="/market">📈 Market</a>
+              <a href="/visualizers">📊 Visualizers</a>
             </nav>
           </div>
         </div>
