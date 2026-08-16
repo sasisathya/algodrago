@@ -198,7 +198,7 @@ export function MarketView() {
               onMouseEnter={() => setHoveredId(algo.id)}
               onMouseLeave={() => setHoveredId(null)}
               onClick={() => {
-                window.location.href = `/visualize/${algo.id}`
+                window.location.href = `/visualize/${algo.id}?from=market`
               }}
               style={{
                 padding: '18px',

@@ -1754,10 +1754,49 @@ export const algorithms: Algorithm[] = [
   ...divideConquerAlgorithms,
 ]
 
+// Helper functions for algorithm queries
 export function getAlgorithmById(id: string): Algorithm | undefined {
   return algorithms.find(algo => algo.id === id)
 }
 
 export function getAlgorithmsByCategory(category: string): Algorithm[] {
   return algorithms.filter(algo => algo.category === category)
+}
+
+export function getAlgorithmsByDifficulty(difficulty: string): Algorithm[] {
+  return algorithms.filter(algo => algo.difficulty === difficulty)
+}
+
+export function getUniqueCategories(): string[] {
+  const categories = new Set(algorithms.map(algo => algo.category))
+  return Array.from(categories).sort()
+}
+
+export function getAlgorithmCountByCategory(): Record<string, number> {
+  return algorithms.reduce((acc, algo) => {
+    acc[algo.category] = (acc[algo.category] || 0) + 1
+    return acc
+  }, {} as Record<string, number>)
+}
+
+export function filterAlgorithms(filters: {
+  category?: string
+  difficulty?: string
+  type?: string
+  searchTerm?: string
+}): Algorithm[] {
+  return algorithms.filter(algo => {
+    if (filters.category && algo.category !== filters.category) return false
+    if (filters.difficulty && algo.difficulty !== filters.difficulty) return false
+    if (filters.type && algo.type !== filters.type) return false
+    if (filters.searchTerm) {
+      const term = filters.searchTerm.toLowerCase()
+      return (
+        algo.name.toLowerCase().includes(term) ||
+        algo.description.toLowerCase().includes(term) ||
+        algo.tags.some(tag => tag.toLowerCase().includes(term))
+      )
+    }
+    return true
+  })
 }

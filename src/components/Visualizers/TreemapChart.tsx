@@ -290,7 +290,7 @@ export function TreemapChart() {
                   onMouseEnter={() => setHoveredId(algoId)}
                   onMouseLeave={() => setHoveredId(null)}
                   onClick={() => {
-                    window.location.href = `/visualize/${algoId}`
+                    window.location.href = `/visualize/${algoId}?from=visualizers`
                   }}
                   style={{
                     cursor: 'pointer',

@@ -14,12 +14,26 @@ import { treeAlgorithms } from '../data/treeAlgorithms.ts'
 import { divideConquerAlgorithms } from '../data/divideConquerAlgorithms.ts'
 import '../style.css'
 
-export function Visualize({ algorithmId }: { algorithmId: string }) {
+export function Visualize({ algorithmId, referrerPage = 'home' }: { algorithmId: string; referrerPage?: string }) {
   // Try to get algorithm from any category
   let algorithm = getAlgorithmById(algorithmId)
   if (!algorithm) {
     algorithm = [...graphAlgorithms, ...treeAlgorithms, ...divideConquerAlgorithms].find(a => a.id === algorithmId)
   }
+
+  // Get referrer page info for back button
+  const getReferrerInfo = () => {
+    switch (referrerPage) {
+      case 'market':
+        return { href: '/market', label: 'Algorithm Market' }
+      case 'visualizers':
+        return { href: '/visualizers', label: 'Visualizers Dashboard' }
+      default:
+        return { href: '/', label: 'Home' }
+    }
+  }
+
+  const referrer = getReferrerInfo()
 
   // Main states
   const [array, setArray] = useState<number[]>([5, 3, 8, 1, 9, 2, 7, 4, 6])
@@ -398,27 +412,9 @@ export function Visualize({ algorithmId }: { algorithmId: string }) {
   const stepDisabled = currentStepIndex >= steps.length - 1
 
   return (
-    <div style={{ minHeight: '100vh' }}>
-      {/* Header */}
-      <header>
-        <div className="container">
-          <div className="header-content">
-            <div className="logo">
-              <div className="logo-icon">∑</div>
-              <h1>Visualize DSA</h1>
-            </div>
-            <nav>
-              <a href="/">Home</a>
-              <a href="#visualizers" className="active">Visualizers</a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main style={{ padding: '2rem' }}>
+    <div style={{ padding: '2rem' }}>
         <div style={{ marginBottom: '1.5rem' }}>
-          <a href="/" style={{
+          <a href={referrer.href} style={{
             color: 'var(--text-secondary)',
             textDecoration: 'none',
             fontSize: '0.9rem',
@@ -428,7 +424,7 @@ export function Visualize({ algorithmId }: { algorithmId: string }) {
             fontWeight: 600,
             transition: 'color 0.2s ease',
           }}>
-            ← Back to Visualizers
+            ← Back to {referrer.label}
           </a>
         </div>
 
@@ -572,7 +568,6 @@ export function Visualize({ algorithmId }: { algorithmId: string }) {
             description={algorithm.description}
           />
         </div>
-      </main>
 
       <SettingsModal
         open={showSettings}

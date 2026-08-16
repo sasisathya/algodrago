@@ -122,7 +122,7 @@ export function Home() {
   const AlgorithmCard = ({ algo }: { algo: any }) => (
     <a
       key={algo.id}
-      href={`/visualize/${algo.id}`}
+      href={`/visualize/${algo.id}?from=home`}
       style={{
         textDecoration: 'none',
         flex: '0 0 380px',
@@ -210,26 +210,7 @@ export function Home() {
   )
 
   return (
-    <div>
-      {/* Header */}
-      <header>
-        <div className="container">
-          <div className="header-content">
-            <div className="logo">
-              <div className="logo-icon">∑</div>
-              <h1>Visualize DSA</h1>
-            </div>
-            <nav>
-              <a href="/" className="active">Home</a>
-              <a href="/market">📈 Market</a>
-              <a href="/visualizers">📊 Visualizers</a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="container">
+    <div className="container" style={{ paddingTop: '2rem' }}>
         {/* Welcome Section */}
         <div style={{ marginBottom: '3.5rem', textAlign: 'center' }}>
           <h2 className="hero-title">Algorithm Visualizer</h2>
@@ -383,7 +364,6 @@ export function Home() {
           algoList={divideConquerAlgorithms}
           carouselRef={divideConquerCarouselRef}
         />
-      </main>
     </div>
   )
 }
